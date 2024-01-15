@@ -5,6 +5,11 @@ $.getJSON('plugins', function(data) {
   });
 }).done(function () {load_content(window.location.hash.replace("#", ""));});
 
+$.getJSON('doc', function(data) {
+  document.getElementById("footer").innerHTML = '<p><a href="'+data['DOC_PROJECT_URL']+'">'+data['DOC_PROJECT_NAME']+'</a> - License: '+data['DOC_PROJECT_LICENSE']+''
+  document.getElementById("title").innerHTML = data['DOC_PROJECT_NAME']
+});
+
 
 function load_content(plugin) {
   $.getJSON('plugins/'+plugin, function(data) {

@@ -50,6 +50,9 @@ def exec_feature(plugin,feature):
     else:
         return "Invalid Request"
 
+@app.route('/doc')
+def doc():
+    return {'DOC_PROJECT_URL':os.environ['DOC_PROJECT_URL'], 'DOC_PROJECT_NAME':os.environ['DOC_PROJECT_NAME'], 'DOC_PROJECT_LICENSE':os.environ['DOC_PROJECT_LICENSE']}
 
 @app.route('/swagger')
 def swagger():

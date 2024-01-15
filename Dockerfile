@@ -6,6 +6,7 @@ RUN pip3 install -r requirements.txt
 
 ENV DOC_PROJECT_URL="https://github.com/tttttx2/ShittyLinuxMDM"
 ENV DOC_PROJECT_NAME="ShittyLinuxMDM"
+ENV DOC_PROJECT_LICENSE="UNDEFINED"
 
 COPY app /app/
 

@@ -12,9 +12,9 @@ def read(id=False): # GET
         screen_content = f.read()
         f.close()
         screen_content = json.loads(screen_content)
-        if (screen_content['onboarded']) != "No":
+        if (screen_content['onboarded']) == "No":
             continue
-        content += [{'id':screen_content['id'], 'onboarded':screen_content['onboarded'], 'onboarding_command':'curl \'http://localhost:8080/plugins/scripts/manage_scripts?onboarding_id='+screen_content['id']+'\' | sudo bash -' } ]
+        content += [{'id':screen_content['id'], 'onboarded':screen_content['onboarded'], 'offboarding_command':'curl \'http://localhost:8080/plugins/scripts/manage_scripts?offboarding_id='+screen_content['id']+'\' | sudo bash -' } ]
     if content == []:
-        return {"error":'All configured endpoints are onboarded. Add a new one first!'}
+        return {"error":'No endpoints onboarded, there is nothing to offboard!'}
     return {'table':content, 'readonly':True}

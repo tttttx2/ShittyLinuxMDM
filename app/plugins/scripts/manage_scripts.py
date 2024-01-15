@@ -16,7 +16,7 @@ def create(id): # POST
         f.close()
         return {'ok':'Script created'}
 
-def read(id=False, onboarding_id=False): # GET
+def read(id=False, onboarding_id=False, offboarding_id=False): # GET
     if onboarding_id!=False:
         return """cat <<'EOF' | tee /opt/mdm.sh
 #!/bin/bash
@@ -44,7 +44,16 @@ chmod +x /opt/mdm.sh
 crontab -l -u root > mycron
 echo "*/5 * * * * /opt/mdm.sh" >> mycron
 crontab -u root mycron
-        """
+"""
+
+    if offboarding_id!=False:
+        return """URL=\""""+os.environ["MDM_URL"]+"""\"
+ID=\""""+offboarding_id+"""\"
+crontab -l -u root | grep -v "/opt/mdm.sh" > mycron
+crontab -u root mycron
+rm /opt/mdm.sh
+curl -s -X DELETE "$URL/plugins/endpoints/manage_endpoints?id=$ID"
+"""
 
     if id == False or id == "": # return all screens
         content = []
