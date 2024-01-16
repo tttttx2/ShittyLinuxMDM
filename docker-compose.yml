@@ -1,9 +1,0 @@
-services:
-  ssp:
-    build: .
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./data:/data
-    environment:
-      - MDM_URL=http://localhost:8080
